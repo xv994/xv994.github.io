@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<head>
+
+    <meta charset="utf-8">
+
+    <style>
+        body {
+            margin: 20%;
+        }
+    </style>
+    
+    <script>
+        var curAnsArr = [["cbdda","ccdbc","bddaa","bcbad"], ["bacdb","abbad","cdcba","cabdc"], ["cadbc","adcbd","dabac","cadbc"], ["cbacb","cdadb","acdda","bdabc"], ["cacdb","abcdd","caddb","dbdba"], ["cbadc","dcaab","cbdcb","dabad"], ["adcbd","dcaab","acbdc","dbcab"], ["cdada","acdab","dbbcc","bbdac"], ["badab","cdcba","bdacc","abcbd"], ["cbdba","bdcac","dcbaa","cdadb"], ["dbacd","cdada","abbdc","cdbca"], ["dbacc","adcbd","bbdac","acbad"], ["cadba","dbcdc","cbadb","adcba"], ["dabdc","bcadb","bcdca","adcab"], ["adbca","dacbc","bcdba","dabcd"], ["bcbda","acdab","dadbc","caccd"], ["dcadb","dcbab","cdbac","baacd"], ["bdcac","bdacd","abcda","cdbab"], ["cbdbc","dacad","acdcb","bdaba"], ["cbcdd","bdcca","abdaa","cbbda"], ["acddb","cbcda","baabc","dadbd"]]
+        var year = parseInt(document.getElementById("year").value) - 2002
+        var index = char2index(document.getElementById("index").value)
+        var curAns = curAnsArr[year][index];
+        var isShow = false
+        
+        function char2index(c) {
+            switch (c) {
+                case "A":
+                    return 0;
+                    break;
+                case "B":
+                    return 1;
+                    break;
+                case "C":
+                    return 2;
+                    break;
+                case "D":
+                    return 3;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function calAcc(a, b){
+            var acc = 0;
+            for(var i = 0; i < 5; i++){
+                if (a[i] == b[i])
+                    acc += 20
+            }
+            document.getElementById("acc").innerText = acc + "%"
+        }
+
+        function init(){
+            document.getElementById("curAns").style = "background-color: #000; width: 100px;"
+            year = parseInt(document.getElementById("year").value) - 2002
+            index = char2index(document.getElementById("index").value)
+            myAns = document.getElementById("in").value.toLowerCase()
+            curAns = curAnsArr[year][index];
+            document.getElementById("curAns").value = "显示答案"
+        }
+
+        function submit() {
+            init()
+            isShow = true
+            showAns()
+            calAcc(myAns, curAns);
+        }
+
+        function showAns(){
+            init()
+            var ele = document.getElementById("curAns")
+            ele.innerText = curAns;
+            if (!isShow){
+                ele.style = "background-color: #FFF; width: 100px;"
+                document.getElementById("showBut").setAttribute("value", "隐藏答案") 
+                isShow = true
+            }
+            else{
+                ele.style = "background-color: #000; width: 100px;"
+                document.getElementById("showBut").setAttribute("value", "显示答案") 
+                isShow = false
+            }
+        }
+    </script>
+
+</head>
+
+<body onload="init()">
+
+    <fieldset>
+        <legend>Input area:</legend>
+        年份：
+        <select id="year">
+            <option value="2002">2002</option>
+            <option value="2003">2003</option>
+            <option value="2004">2004</option>
+            <option value="2005">2005</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+        </select><br>
+        篇数：
+        <select id="index">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+        </select><br>
+        请输入你的答案：<input type="text" id="in" autofocus maxlength="5">
+        <input type="button" value="确认" onclick="submit()">
+    </fieldset>
+    <br>
+    正确率：<div id="acc"></div> <br>
+    正确答案：<p id="curAns" style="background-color: #000; width: 100px;">fsadf</p>
+    <br>
+    <input type="button" id="showBut" value="显示答案" onclick="showAns()">      
+</body>
