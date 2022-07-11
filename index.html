@@ -38,8 +38,9 @@
         function calAcc(a, b){
             var acc = 0;
             for(var i = 0; i < 5; i++){
-                if (a[i] == b[i])
+                if (a[i] == b[i]){
                     acc += 20
+                }
             }
             document.getElementById("acc").innerText = acc + "%"
         }
@@ -50,14 +51,17 @@
             index = char2index(document.getElementById("index").value)
             myAns = document.getElementById("in").value.toLowerCase()
             curAns = curAnsArr[year][index];
-            document.getElementById("curAns").value = "显示答案"
         }
 
         function submit() {
-            init()
             isShow = true
             showAns()
             calAcc(myAns, curAns);
+        }
+
+        function change(){
+            isShow = !isShow
+            showAns()
         }
 
         function showAns(){
@@ -84,7 +88,7 @@
     <fieldset>
         <legend>Input area:</legend>
         年份：
-        <select id="year">
+        <select id="year" onchange="change()">
             <option value="2002">2002</option>
             <option value="2003">2003</option>
             <option value="2004">2004</option>
@@ -108,7 +112,7 @@
             <option value="2022">2022</option>
         </select><br>
         篇数：
-        <select id="index">
+        <select id="index" onchange="change()">
             <option value="A">A</option>
             <option value="B">B</option>
             <option value="C">C</option>
